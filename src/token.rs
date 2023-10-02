@@ -15,6 +15,10 @@ impl Token {
     }
 
     pub fn add_market(&mut self, market: Market) {
-        self.market.insert(&market.quote, market);
+        self.market.insert(market.quote, market);
+    }
+
+    pub fn remove_market(&mut self, market: Market) {
+        self.market.remove(&market.quote);
     }
 }

@@ -13,4 +13,13 @@ impl UserPosition {
             balances: HashMap::new(),
         }
     }
+
+    pub fn update_balance(&mut self, market: Market, balance: i32) {
+        account_balance = self.balances.get(&market);
+        if (account_balance == None) {
+            self.balances.insert(market, balance);
+        } else {
+            self.balances.insert(market, account_balance + balance);
+        }
+    }
 }

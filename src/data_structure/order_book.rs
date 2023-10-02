@@ -60,10 +60,10 @@ impl OrderBookTrait for OrderBook {
                         if ask.quantity <= order.quantity {
                             order.quantity -= ask.quantity;
                             ask.quantity = 0;
+                            ask.fill();
                         } else {
                             ask.quantity -= order.quantity;
                             order.quantity = 0;
-                            ask.fill();
                             orders.push_front(ask);
                         }
                     } else {
@@ -82,7 +82,6 @@ impl OrderBookTrait for OrderBook {
                         } else {
                             bid.quantity -= order.quantity;
                             order.quantity = 0;
-                            bid.fill();
                             orders.push_front(bid);
                         }
                     } else {
