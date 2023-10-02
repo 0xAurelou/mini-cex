@@ -1,3 +1,5 @@
+use std::default;
+
 #[derive(Debug, Copy, Clone)]
 pub enum OrderType {
     Bid,
@@ -11,7 +13,13 @@ pub enum OrderStatus {
     Cancelled,
 }
 
-#[derive(Debug)]
+impl Default for OrderStatus {
+    fn default() -> Self {
+        Self::Open
+    }
+}
+
+#[derive(Debug, Copy, Clone)]
 pub struct Order {
     pub id: i32,
     pub user_id: i32,
@@ -75,11 +83,8 @@ impl Order {
         }
     }
 
-    pub fn fill(&mut self, quantity: i32) {
-        self.quantity -= quantity;
-        if self.quantity == 0 {
-            self.status = OrderStatus::Filled;
-        }
+    pub fn fill(&mut self) {
+        self.status = OrderStatus::Filled;
     }
 
     pub fn cancel(&mut self) {
@@ -91,29 +96,5 @@ impl Order {
             "id: {}, user_id: {}, side: {:?}, status: {:?}, price: {}, quantity: {}",
             self.id, self.user_id, self.side, self.status, self.price, self.quantity
         )
-    }
-
-    pub fn get_id(&self) -> i32 {
-        self.id
-    }
-
-    pub fn get_user_id(&self) -> i32 {
-        self.user_id
-    }
-
-    pub fn get_side(&self) -> OrderType {
-        self.side
-    }
-
-    pub fn get_status(&self) -> OrderStatus {
-        self.status
-    }
-
-    pub fn get_price(&self) -> i32 {
-        self.price
-    }
-
-    pub fn get_quantity(&self) -> i32 {
-        self.quantity
     }
 }
