@@ -1,25 +1,21 @@
-use market::Market;
+use token::Token;
 
 // We want to track id, and all the balances he has in every market
-pub struct UserPosition {
+pub struct Account{
     pub id: i32,
-    pub balances: HashMap<Market, i32>,
+    pub balances: HashMap<Token, u32>,
 }
 
-impl UserPosition {
-    pub fn new(id: i32) -> Self {
-        UserPosition {
-            id,
+impl Account{
+    pub fn new(id: i32) -> Account{
+        Account{
+            id: id,
             balances: HashMap::new(),
         }
     }
 
-    pub fn update_balance(&mut self, market: Market, balance: i32) {
-        account_balance = self.balances.get(&market);
-        if (account_balance == None) {
-            self.balances.insert(market, balance);
-        } else {
-            self.balances.insert(market, account_balance + balance);
-        }
+    pub fn update_balance(&mut self, token: Token, amount: i32){
+        let balance = self.balances.entry(token).or_insert(0);
+        *balance += amount;
     }
 }

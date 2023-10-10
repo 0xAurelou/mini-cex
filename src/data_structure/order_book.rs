@@ -1,4 +1,4 @@
-use super::order::{self, Order};
+use super::order::{Order};
 use std::collections::{BTreeMap, VecDeque};
 
 trait OrderBookTrait {
