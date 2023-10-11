@@ -7,4 +7,3 @@ edition = "2021"
 
 [dependencies]
 cargo-tarpaulin = "0.27.1"
-lobster = "0.7.0"
